@@ -181,32 +181,54 @@ testDistinctValues1();
 
 
 const testCountValues1 = ()  => {
-    const result = countValues('4.5 3 6 4.5 3 6 3 6 6 4 2 3 ');
-    const expected = ''; //DEFINIR A SINTAXE DO RESULTADO
+    const result = countValues('4.5 3 6 4.5 3 6 3 6 6 4 2 3');
+    const expected = '2(1) 3(4) 4(1) 6(4) 4.5(2) ';
     console.assert(result === expected, `esperado: ${expected}, obtido: ${result}`)   
 }
 const testCountValues2 = ()  => {
     const result = countValues('2 3 3 6 2 3 2 5 3 2 1 1 5');
-    const expected = ''; //DEFINIR A SINTAXE DO RESULTADO
+    const expected = '1(2) 2(4) 3(4) 5(2) 6(1) ';
     console.assert(result === expected, `esperado: ${expected}, obtido: ${result}`)   
 }
 
 const countValues = (string) => {
     const arrayInicial = string.split(' ');
-    let frequencyObj = {};
+    let frequency = {};
 
     for(let i = 0; i < arrayInicial.length; i++){
         let number = arrayInicial[i];
-        if(frequencyObj.number){
-            console.log(frequencyObj.number)
-            frequencyObj.number += 1;
+        if(frequency[`${number}`]){
+            frequency[`${number}`] += 1;
         }else{
-            frequencyObj.number = 1;
+            frequency[`${number}`] = 1;
         }
     }
  
-    const stringDistinct = arrayDistinct.join(' ');
-    return stringDistinct;
+    let result = '';
+
+    for(let i in frequency){
+        result += i + '(' + frequency[i] +') ';
+    }
+
+    return result;
 }
 testCountValues1();
 testCountValues2();
+
+//8
+
+testEvaluateExpression1
+const testEvaluateExpression1 = ()  => {
+    const result = evaluateExpression('2 3 3 6 2 3 2 5 3 2 1 1 5');
+    const expected = '1(2) 2(4) 3(4) 5(2) 6(1)';
+    console.assert(result === expected, `esperado: ${expected}, obtido: ${result}`)   
+}
+const testEvaluateExpression2 = ()  => {
+    const result = evaluateExpression('2 3 3 6 2 3 2 5 3 2 1 1 5');
+    const expected = '1(2) 2(4) 3(4) 5(2) 6(1)';
+    console.assert(result === expected, `esperado: ${expected}, obtido: ${result}`)   
+}
+
+const evaluateExpression = () =>{
+    
+}
