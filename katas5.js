@@ -217,18 +217,32 @@ testCountValues2();
 
 //8
 
-testEvaluateExpression1
+
 const testEvaluateExpression1 = ()  => {
-    const result = evaluateExpression('2 3 3 6 2 3 2 5 3 2 1 1 5');
-    const expected = '1(2) 2(4) 3(4) 5(2) 6(1)';
+    const result = evaluateExpression("a * b + c / d", {a: 2, b: 4, c: 8, d: 4});
+    const expected = 10;
     console.assert(result === expected, `esperado: ${expected}, obtido: ${result}`)   
 }
 const testEvaluateExpression2 = ()  => {
-    const result = evaluateExpression('2 3 3 6 2 3 2 5 3 2 1 1 5');
-    const expected = '1(2) 2(4) 3(4) 5(2) 6(1)';
+    const result = evaluateExpression("x + y + z - m", {x: 1, y: 7, z: 3, m: 14});
+    const expected = -3;
     console.assert(result === expected, `esperado: ${expected}, obtido: ${result}`)   
 }
 
-const evaluateExpression = () =>{
+const evaluateExpression = (expression, obj) =>{
+    for(let i = 0; i < expression.length; i++){
+        let item = expression[i] 
+
+        if(obj[`${item}`]){
+            let number =obj[`${item}`].toString();
+            expression = expression.replace(item, number) ;
+            
+        }
+    }
     
+    const result = eval(expression);
+    return result;
 }
+
+testEvaluateExpression1();
+testEvaluateExpression2();
